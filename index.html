@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<style>
+      body {
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        text-align: center;
+      }
+      
+      h1, h2 {
+        color: #0077C9;
+        margin-top: 30px;
+      }
+      
+      table {
+        margin: 30px 0;
+        border-collapse: collapse;
+        width: 80%;
+        margin: 0 auto;
+      }
+      
+      th, td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+      }
+      
+      th {
+        background-color: #dddddd;
+      }
+      
+      button {
+        background-color: #0077C9;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 10px 20px;
+        margin-top: 20px;
+      }
+      
+      #mouad_total_profit, #fatima_total_profit {
+        font-weight: bold;
+      }
+      
+      @media only screen and (max-width: 600px) {
+        table {
+          width: 100%;
+          margin: 0 auto;
+        }
+        
+        th, td {
+          font-size: 14px;
+        }
+        
+        h1, h2 {
+          font-size: 24px;
+        }
+        
+        button {
+          font-size: 14px;
+          padding: 10px;
+        }
+      }
+      
+      @media only screen and (max-width: 600px) {
+        th, td {
+          display: block;
+          width: 100%;
+        }
+        
+        th {
+          margin-top: 20px;
+        }
+      }
+    </style>
+
+
+  </head>
+  <body>
+    <h1>Profit Distribution Calculator</h1>
+    <h2>Total Sales</h2>
+    <table id="table-one">
+      <tr>
+        <th>Market</th>
+        <th>Book 1 Profit</th>
+        <th>Book 2 Profit</th>
+        <th>Exchange Rate to USD</th>
+      </tr>
+      <tr>
+        <td>Amazon.com</td>
+        <td><input type="text" id="b1-amazon-com"></td>
+        <td><input type="text" id="b2-amazon-com"></td>
+        <td><input type="text" id="exchange-rate-usd" value="1"></td>
+      </tr>
+      <tr>
+        <td>Amazon.co.uk</td>
+        <td><input type="text" id="b1-amazon-co-uk"></td>
+        <td><input type="text" id="b2-amazon-co-uk"></td>
+        <td><input type="text" id="exchange-rate-gbp"></td>
+      </tr>
+      <tr>
+        <td>Amazon.de</td>
+        <td><input type="text" id="b1-amazon-de"></td>
+        <td><input type="text" id="b2-amazon-de"></td>
+        <td><input type="text" id="exchange-rate-eur"></td>
+      </tr>
+      <tr>
+        <td>Amazon.ca</td>
+        <td><input type="text" id="b1-amazon-ca"></td>
+        <td><input type="text" id="b2-amazon-ca"></td>
+        <td><input type="text" id="exchange-rate-cad"></td>
+      </tr>
+    </table>
+    <br>
+    <button id="calculate-table-two">Calculate Books Profit</button>
+    <br><br>
+
+    <h2>Books Profit</h2>
+    <table id="table-two" style="display: none;">
+      <tr>
+        <th>Market</th>
+        <th>Book 1 Profit (Mouad)</th>
+        <th>Book 1 Profit (Fatima)</th>
+        <th>Book 2 Profit (Mouad)</th>
+        <th>Book 2 Profit (Fatima)</th>
+      </tr>
+      <tr>
+        <td>Amazon.com</td>
+        <td><span id="b1-amazon-com-mouad"></span></td>
+        <td><span id="b1-amazon-com-fatima"></span></td>
+        <td><span id="b2-amazon-com-mouad"></span></td>
+<td><span id="b2-amazon-com-fatima"></span></td>
+</tr>
+<tr>
+<td>Amazon.co.uk</td>
+<td><span id="b1-amazon-co-uk-mouad"></span></td>
+<td><span id="b1-amazon-co-uk-fatima"></span></td>
+<td><span id="b2-amazon-co-uk-mouad"></span></td>
+<td><span id="b2-amazon-co-uk-fatima"></span></td>
+</tr>
+<tr>
+<td>Amazon.de</td>
+<td><span id="b1-amazon-de-mouad"></span></td>
+<td><span id="b1-amazon-de-fatima"></span></td>
+<td><span id="b2-amazon-de-mouad"></span></td>
+<td><span id="b2-amazon-de-fatima"></span></td>
+</tr>
+<tr>
+<td>Amazon.ca</td>
+<td><span id="b1-amazon-ca-mouad"></span></td>
+<td><span id="b1-amazon-ca-fatima"></span></td>
+<td><span id="b2-amazon-ca-mouad"></span></td>
+<td><span id="b2-amazon-ca-fatima"></span></td>
+</tr>
+</table>
+<br>
+<button id="calculate-table-three">Calculate Total Profit</button>
+<br><br>
+<h2>Total Profit</h2>
+<table id="table-three" style="display: none;">
+  <tr>
+    <th>Partner</th>
+    <th>Total Profit</th>
+  </tr>
+  <tr>
+    <td>Mouad</td>
+    <td><span id="total-profit-mouad"></span></td>
+  </tr>
+  <tr>
+    <td>Fatima</td>
+    <td><span id="total-profit-fatima"></span></td>
+  </tr>
+</table>
+<p>Amazon Ads expenses: <input type="text" id="amazon-ads-expenses"></p>
+
+  <button id="calculate-table-four">Calculate Final Profit</button>
+<br>
+<h2>Final Profit</h2>
+<table id="table-four" style="display: none;">
+
+  <tr>
+    <th>Partner</th>
+    <th>Profit after Ads</th>
+  </tr>
+  <tr>
+    <td>Mouad</td>
+    <td><span id="profit-after-ads-mouad"></span></td>
+  </tr>
+  <tr>
+    <td>Fatima</td>
+    <td><span id="profit-after-ads-fatima"></span></td>
+  </tr>
+</table>
+<br>
+
+<script>
+  const calculateTableTwo = () => {
+    const b1AmazonComProfit = parseFloat(document.querySelector("#b1-amazon-com").value) * (1 - 0.1);
+    const b2AmazonComProfit = parseFloat(document.querySelector("#b2-amazon-com").value) * (1 - 0.1);
+    const b1AmazonCoUkProfit = parseFloat(document.querySelector("#b1-amazon-co-uk").value); (1 - 0.01);
+    const b2AmazonCoUkProfit = parseFloat(document.querySelector("#b2-amazon-co-uk").value); (1 - 0.01);
+    const b1AmazonDeProfit = parseFloat(document.querySelector("#b1-amazon-de").value); (1 - 0.01);
+    const b2AmazonDeProfit = parseFloat(document.querySelector("#b2-amazon-de").value); (1 - 0.01);
+    const b1AmazonCaProfit = parseFloat(document.querySelector("#b1-amazon-ca").value); (1 - 0.01);
+    const b2AmazonCaProfit = parseFloat(document.querySelector("#b2-amazon-ca").value); (1 - 0.01);
+    const exchangeRateUsd = parseFloat(document.querySelector("#exchange-rate-usd").value); 
+    const exchangeRateGbp = parseFloat(document.querySelector("#exchange-rate-gbp").value); 
+    const exchangeRateEur = parseFloat(document.querySelector("#exchange-rate-eur").value); 
+    const exchangeRateCad = parseFloat(document.querySelector("#exchange-rate-cad").value);
+
+    const b1AmazonComProfitMouad = b1AmazonComProfit * 0.65;
+    const b1AmazonComProfitFatima = b1AmazonComProfit * 0.35;
+    const b2AmazonComProfitMouad = b2AmazonComProfit * 0.8;
+    const b2AmazonComProfitFatima = b2AmazonComProfit * 0.2;
+    const b1AmazonCoUkProfitMouad = b1AmazonCoUkProfit * 0.65 * (exchangeRateGbp / exchangeRateUsd);
+    const b1AmazonCoUkProfitFatima = b1AmazonCoUkProfit * 0.35 * (exchangeRateGbp / exchangeRateUsd);
+    const b2AmazonCoUkProfitMouad = b2AmazonCoUkProfit * 0.8 * (exchangeRateGbp / exchangeRateUsd);
+    const b2AmazonCoUkProfitFatima = b2AmazonCoUkProfit * 0.2 * (exchangeRateGbp / exchangeRateUsd);
+    const b1AmazonDeProfitMouad = b1AmazonDeProfit * 0.65 * (exchangeRateEur / exchangeRateUsd);
+    const b1AmazonDeProfitFatima = b1AmazonDeProfit * 0.35 * (exchangeRateEur / exchangeRateUsd);
+    const b2AmazonDeProfitMouad = b2AmazonDeProfit * 0.8 * (exchangeRateEur / exchangeRateUsd);
+    const b2AmazonDeProfitFatima = b2AmazonDeProfit * 0.2 * (exchangeRateEur / exchangeRateUsd);
+const b1AmazonCaProfitMouad = b1AmazonCaProfit * 0.65 * (exchangeRateCad / exchangeRateUsd);
+const b1AmazonCaProfitFatima = b1AmazonCaProfit * 0.35 * (exchangeRateCad / exchangeRateUsd);
+const b2AmazonCaProfitMouad = b2AmazonCaProfit * 0.8 * (exchangeRateCad / exchangeRateUsd);
+const b2AmazonCaProfitFatima = b2AmazonCaProfit * 0.2 * (exchangeRateCad / exchangeRateUsd);
+    document.querySelector("#b1-amazon-com-mouad").innerHTML = b1AmazonComProfitMouad;
+    document.querySelector("#b1-amazon-com-fatima").innerHTML = b1AmazonComProfitFatima;
+    document.querySelector("#b2-amazon-com-mouad").innerHTML = b2AmazonComProfitMouad;
+    document.querySelector("#b2-amazon-com-fatima").innerHTML = b2AmazonComProfitFatima;
+    document.querySelector("#b1-amazon-co-uk-mouad").innerHTML = b1AmazonCoUkProfitMouad;
+    document.querySelector("#b1-amazon-co-uk-fatima").innerHTML = b1AmazonCoUkProfitFatima;
+    document.querySelector("#b2-amazon-co-uk-mouad").innerHTML = b2AmazonCoUkProfitMouad;
+    document.querySelector("#b2-amazon-co-uk-fatima").innerHTML = b2AmazonCoUkProfitFatima;
+    document.querySelector("#b1-amazon-de-mouad").innerHTML = b1AmazonDeProfitMouad;
+    document.querySelector("#b1-amazon-de-fatima").innerHTML = b1AmazonDeProfitFatima;
+    document.querySelector("#b2-amazon-de-mouad").innerHTML = b2AmazonDeProfitMouad;
+    document.querySelector("#b2-amazon-de-fatima").innerHTML = b2AmazonDeProfitFatima;
+    document.querySelector("#b1-amazon-ca-mouad").innerHTML = b1AmazonCaProfitMouad;
+    document.querySelector("#b1-amazon-ca-fatima").innerHTML = b1AmazonCaProfitFatima;
+    document.querySelector("#b2-amazon-ca-mouad").innerHTML = b2AmazonCaProfitMouad;
+    document.querySelector("#b2-amazon-ca-fatima").innerHTML = b2AmazonCaProfitFatima;
+
+    document.querySelector("#table-two").style.display = "table";
+  };
+  document.querySelector("#calculate-table-two").addEventListener("click", calculateTableTwo);
+
+const calculateTableThree = () => {
+  const b1AmazonComProfitMouad = parseFloat(document.querySelector("#b1-amazon-com-mouad").innerHTML) * (1 - 0.01);
+  const b2AmazonComProfitMouad = parseFloat(document.querySelector("#b2-amazon-com-mouad").innerHTML) * (1 - 0.01);
+  const b1AmazonCoUkProfitMouad = parseFloat(document.querySelector("#b1-amazon-co-uk-mouad").innerHTML) * (1 - 0.01);
+  const b2AmazonCoUkProfitMouad = parseFloat(document.querySelector("#b2-amazon-co-uk-mouad").innerHTML) * (1 - 0.01);
+  const b1AmazonDeProfitMouad = parseFloat(document.querySelector("#b1-amazon-de-mouad").innerHTML) * (1 - 0.01);
+  const b2AmazonDeProfitMouad = parseFloat(document.querySelector("#b2-amazon-de-mouad").innerHTML) * (1 - 0.01);
+  const b1AmazonCaProfitMouad = parseFloat(document.querySelector("#b1-amazon-ca-mouad").innerHTML) * (1 - 0.01);
+  const b2AmazonCaProfitMouad = parseFloat(document.querySelector("#b2-amazon-ca-mouad").innerHTML) * (1 - 0.01);
+  const totalProfitMouad = b1AmazonComProfitMouad + b2AmazonComProfitMouad + b1AmazonCoUkProfitMouad + b2AmazonCoUkProfitMouad + b1AmazonDeProfitMouad + b2AmazonDeProfitMouad + b1AmazonCaProfitMouad + b2AmazonCaProfitMouad;
+
+  const b1AmazonComProfitFatima = parseFloat(document.querySelector("#b1-amazon-com-fatima").innerHTML) * (1 - 0.01);
+  const b2AmazonComProfitFatima = parseFloat(document.querySelector("#b2-amazon-com-fatima").innerHTML) * (1 - 0.01);
+  const b1AmazonCoUkProfitFatima = parseFloat(document.querySelector("#b1-amazon-co-uk-fatima").innerHTML) * (1 - 0.01);
+  const b2AmazonCoUkProfitFatima = parseFloat(document.querySelector("#b2-amazon-co-uk-fatima").innerHTML) * (1 - 0.01);
+  const b1AmazonDeProfitFatima = parseFloat(document.querySelector("#b1-amazon-de-fatima").innerHTML) * (1 - 0.01);
+  const b2AmazonDeProfitFatima = parseFloat(document.querySelector("#b2-amazon-de-fatima").innerHTML) * (1 - 0.01);
+  const b1AmazonCaProfitFatima = parseFloat(document.querySelector("#b1-amazon-ca-fatima").innerHTML) * (1 - 0.01);
+  const b2AmazonCaProfitFatima = parseFloat(document.querySelector("#b2-amazon-ca-fatima").innerHTML) * (1 - 0.01);
+  const totalProfitFatima = b1AmazonComProfitFatima + b2AmazonComProfitFatima + b1AmazonCoUkProfitFatima + b2AmazonCoUkProfitFatima + b1AmazonDeProfitFatima + b2AmazonDeProfitFatima + b1AmazonCaProfitFatima + b2AmazonCaProfitFatima;
+    document.querySelector("#total-profit-mouad").innerHTML = totalProfitMouad;
+    document.querySelector("#total-profit-fatima").innerHTML = totalProfitFatima;
+
+    document.querySelector("#table-three").style.display = "table";
+  };
+  document.querySelector("#calculate-table-three").addEventListener("click", calculateTableThree);
+
+  const calculateTableFour = () => {
+    const amazonAdsExpenses = parseFloat(document.querySelector("#amazon-ads-expenses").value);
+    const totalProfitMouad = parseFloat(document.querySelector("#total-profit-mouad").innerHTML);
+    const totalProfitFatima = parseFloat(document.querySelector("#total-profit-fatima").innerHTML);
+
+    const profitAfterAdsMouad = totalProfitMouad - amazonAdsExpenses * 0.725;
+    const profitAfterAdsFatima = totalProfitFatima - amazonAdsExpenses * 0.275;
+
+    document.querySelector("#profit-after-ads-mouad").innerHTML = profitAfterAdsMouad;
+    document.querySelector("#profit-after-ads-fatima").innerHTML = profitAfterAdsFatima;
+
+    document.querySelector("#table-four").style.display = "table";
+  };
+  document.querySelector("#calculate-table-four").addEventListener("click", calculateTableFour);
+</script>
+
+  </body>
+</html>
+
+
+
+
